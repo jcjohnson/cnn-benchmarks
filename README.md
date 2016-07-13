@@ -1,5 +1,13 @@
 # deeplearning-benchmarks
 
+### alexnet (input 16 x 3 x 224 x 224)
+
+|GPU|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---|---|
+|GeForce GTX 1080 (cuDNN 5005)|7.36|7.36|23.18|
+|GeForce GTX TITAN X (cuDNN 5005)|7.02|7.02|23.71|
+|Tesla K40c (cuDNN 5005)|18.32|18.32|61.48|
+
 ### vgg16 (input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
