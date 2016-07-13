@@ -11,6 +11,17 @@
 |Tesla K40c (cuDNN 5005)|265.77|265.77|920.21|
 |Tesla K40c (nn)|340.79|340.79|1231.01|
 
+### vgg19 (input 16 x 3 x 224 x 224)  
+
+|GPU|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---|---|
+|GeForce GTX 1080 (cuDNN 5005)|80.39|80.39|281.69|
+|GeForce GTX TITAN X (cuDNN 5005)|93.83|93.83|323.40|
+|GeForce GTX 1080 (nn)|176.45|176.45|630.08|
+|GeForce GTX TITAN X (nn)|215.55|215.55|709.88|
+|Tesla K40c (cuDNN 5005)|325.18|325.18|1129.65|
+|Tesla K40c (nn)|416.65|416.65|1475.02|
+
 
 ### resnet-18 (input 16 x 3 x 224 x 224)
 
@@ -35,6 +46,27 @@
 |Tesla K40c (cuDNN 5005)|95.11|95.11|303.80|
 |Tesla K40c (nn)|190.80|190.80|571.37|
 
+### resnet-50 (input 16 x 3 x 224 x 224)
+
+|GPU|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---|---|
+|GeForce GTX 1080 (cuDNN 5005)|50.67|50.67|153.90|
+|GeForce GTX TITAN X (cuDNN 5005)|56.42|56.42|171.02|
+|GeForce GTX 1080 (nn)|109.81|109.81|311.47|
+|GeForce GTX TITAN X (nn)|136.37|136.37|382.36|
+|Tesla K40c (cuDNN 5005)|129.21|129.21|449.90|
+|Tesla K40c (nn)|250.91|250.91|769.79|
+
+### resnet-101 (input 16 x 3 x 224 x 224)
+
+|GPU|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---|---|
+|GeForce GTX 1080 (cuDNN 5005)|77.77|77.77|235.33|
+|GeForce GTX TITAN X (cuDNN 5005)|88.30|88.30|260.12|
+|GeForce GTX 1080 (nn)|203.33|203.33|524.93|
+|GeForce GTX TITAN X (nn)|258.26|258.26|662.42|
+|Tesla K40c (cuDNN 5005)|220.92|220.92|797.89|
+|Tesla K40c (nn)|477.37|477.37|1373.07|
 
 ### resnet-152 (input 16 x 3 x 224 x 224)
 
