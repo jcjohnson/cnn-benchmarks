@@ -46,13 +46,12 @@ Some general conclusions from this benchmarking:
 ### AlexNet
 (input 16 x 3 x 224 x 224)
 
-AlexNet has five convolutional layers and three fully-connected layers as described in the paper:
+We use the [BVLC AlexNet](https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet) from Caffe.
 
-We use the [BVLC AlexNet](https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet) from Caffe, which achieves
-a top-1 accuracy of **57.1%*
-
-
-
+AlexNet uses grouped convolutions; this was a strategy to allow model parallelism over two GTX 580
+GPUs, which had only 3GB of memory each. Grouped convolutions are no longer commonly used, and are
+not even implemented by the [torch/nn](https://github.com/torch/nn) backend; therefore we can only
+benchmark AlexNet using cuDNN.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -64,7 +63,8 @@ a top-1 accuracy of **57.1%*
 ### VGG-16
 (input 16 x 3 x 224 x 224)
 
-This is Model D in [[2]](#vgg-paper).
+This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
+[available here](https://gist.github.com/ksimonyan/211839e770f7b538e2d8#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -80,7 +80,8 @@ This is Model D in [[2]](#vgg-paper).
 ### VGG-19
 (input 16 x 3 x 224 x 224)
 
-This is Model E in [[2]](#vgg-paper).
+This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
+[available here](https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -96,6 +97,9 @@ This is Model E in [[2]](#vgg-paper).
 ### ResNet-18
 (input 16 x 3 x 224 x 224)
 
+This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
+
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
 |GeForce GTX 1080 (cuDNN 5005)|14.69|14.69|47.07|
@@ -109,6 +113,9 @@ This is Model E in [[2]](#vgg-paper).
 
 ### ResNet-34
 (input 16 x 3 x 224 x 224)
+
+This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -124,6 +131,9 @@ This is Model E in [[2]](#vgg-paper).
 ### ResNet-50
 (input 16 x 3 x 224 x 224)
 
+This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
+
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
 |GeForce GTX 1080 (cuDNN 5005)|50.67|50.67|153.90|
@@ -137,6 +147,9 @@ This is Model E in [[2]](#vgg-paper).
 
 ### ResNet-101
 (input 16 x 3 x 224 x 224)
+
+This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -152,6 +165,9 @@ This is Model E in [[2]](#vgg-paper).
 ### ResNet-152
 (input 16 x 3 x 224 x 224)
 
+This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
+
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
 |GeForce GTX 1080 (cuDNN 5005)|109.93|109.93|328.90|
@@ -165,6 +181,12 @@ This is Model E in [[2]](#vgg-paper).
 
 ### ResNet-200
 (input 16 x 3 x 224 x 224)
+
+This is the 200-layer model described in [[4]](#resnet-eccv) and implemented in 
+[fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
+
+Even with a batch size of 16, the 8GB GTX 1080 did not have enough memory to run
+the model.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
