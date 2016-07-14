@@ -1,7 +1,6 @@
 # cnn-benchmarks
 
-Benchmarks for different popular convolutional neural network models on CPU and different GPUs,
-with and without cuDNN.
+Benchmarks for popular convolutional neural network models on CPU and different GPUs, with and without cuDNN.
 
 Some general conclusions from this benchmarking:
 
@@ -43,7 +42,7 @@ We use the following GPUs for benchmarking:
 |GeForce GTX 1080|8GB GDDRX5|Pascal|2560|8.87|May 2016|
 
 
-### AlexNet
+## AlexNet
 (input 16 x 3 x 224 x 224)
 
 We use the [BVLC AlexNet](https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet) from Caffe.
@@ -59,7 +58,7 @@ benchmark AlexNet using cuDNN.
 |GeForce GTX TITAN X (cuDNN 5005)|7.02|16.69|23.71|
 
 
-### VGG-16
+## VGG-16
 (input 16 x 3 x 224 x 224)
 
 This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
@@ -74,7 +73,7 @@ This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 |CPU: Dual Intel Xeon E5-2630 v3|3101.76|5393.72|8495.48|
 
 
-### VGG-19
+## VGG-19
 (input 16 x 3 x 224 x 224)
 
 This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
@@ -89,7 +88,7 @@ This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 |CPU: Dual Intel Xeon E5-2630 v3|3609.78|6239.45|9849.23|
 
 
-### ResNet-18
+## ResNet-18
 (input 16 x 3 x 224 x 224)
 
 This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in 
@@ -104,7 +103,7 @@ This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in
 |CPU: Dual Intel Xeon E5-2630 v3|847.46|1348.33|2195.78| 
 
 
-### ResNet-34
+## ResNet-34
 (input 16 x 3 x 224 x 224)
 
 This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in 
@@ -119,7 +118,7 @@ This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in
 |CPU: Dual Intel Xeon E5-2630 v3|1530.01|2435.20|3965.21|
 
 
-### ResNet-50
+## ResNet-50
 (input 16 x 3 x 224 x 224)
 
 This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in 
@@ -134,7 +133,7 @@ This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in
 |CPU: Dual Intel Xeon E5-2630 v3|2477.61|4149.64|6627.25|
 
 
-### ResNet-101
+## ResNet-101
 (input 16 x 3 x 224 x 224)
 
 This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
@@ -149,7 +148,7 @@ This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in
 |CPU: Dual Intel Xeon E5-2630 v3|4414.91|6891.33|11306.24|
 
 
-### ResNet-152
+## ResNet-152
 (input 16 x 3 x 224 x 224)
 
 This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
@@ -163,7 +162,7 @@ This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in
 |GeForce GTX TITAN X (nn)|379.79|579.63|959.42|
 |CPU: Dual Intel Xeon E5-2630 v3|6572.17|10300.61|16872.78|
 
-### ResNet-200
+## ResNet-200
 (input 16 x 3 x 224 x 224)
 
 This is the 200-layer model described in [[4]](#resnet-eccv) and implemented in 
