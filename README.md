@@ -11,14 +11,15 @@ The following models are benchmarked:
 
 |Network|Layers|Top-1 error (single-crop)|Top-5 error (single-crop)|Citation|
 |---|---|---|---|---|
-|[AlexNet](#alexnet)|8|-|-|[[1]](#alexnet-paper)
-|[VGG-16](#vgg-16)|16|-|-|[[2]](#vgg-paper)|
-|[VGG-19](#vgg-19)|19|-|-|[[2]](#vgg-paper)|
-|[ResNet-18](#resnet-18)|18|-|-|[[3]](#resnet-cvpr)|
-|[ResNet-50](#resnet-50)|50|-|-|[[3]](#resnet-cvpr)|
-|[ResNet-101](#resnet-101)|101|-|-|[[3]](#resnet-cvpr)|
-|[ResNet-152](#resnet-152)|152|-|-|[[3]](#resnet-cvpr)|
-|[ResNet-200](#resnet-200)|200|-|-|[[4]](#resnet-eccv)|
+|[AlexNet](#alexnet)|8|42.9|19.8|[[1]](#alexnet-paper)
+|[VGG-16](#vgg-16)|16|25.6|8.1|[[2]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|25.5|8.0|[[2]](#vgg-paper)|
+|[ResNet-18](#resnet-18)|18|30.43|10.76|[[3]](#resnet-cvpr)|
+|[ResNet-34](#resnet-34)|34|26.73|8.74|[[3]](#resnet-cvpr)|
+|[ResNet-50](#resnet-50)|50|24.01|7.02|[[3]](#resnet-cvpr)|
+|[ResNet-101](#resnet-101)|101|22.44|6.21|[[3]](#resnet-cvpr)|
+|[ResNet-152](#resnet-152)|152|22.16|6.16|[[3]](#resnet-cvpr)|
+|[ResNet-200](#resnet-200)|200|21.66|5.79|[[4]](#resnet-eccv)|
 
 ### AlexNet
 (input 16 x 3 x 224 x 224)
@@ -41,6 +42,8 @@ a top-1 accuracy of **57.1%*
 ### VGG-16
 (input 16 x 3 x 224 x 224)
 
+This is Model D in [[2]](#vgg-paper).
+
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
 |GeForce GTX 1080 (cuDNN 5005)|66.56|66.56|232.55|
@@ -53,7 +56,9 @@ a top-1 accuracy of **57.1%*
 
 
 ### VGG-19
-(input 16 x 3 x 224 x 224)  
+(input 16 x 3 x 224 x 224)
+
+This is Model E in [[2]](#vgg-paper).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
