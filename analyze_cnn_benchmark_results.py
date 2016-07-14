@@ -63,7 +63,7 @@ def main(args):
 
           f_mean = mean(result['forward_times']) * 1000
           f_std = std(result['forward_times']) * 1000
-          b_mean = mean(result['forward_times']) * 1000
+          b_mean = mean(result['backward_times']) * 1000
           b_std = std(result['backward_times']) * 1000
           t_mean = mean(result['total_times']) * 1000
           t_std = std(result['total_times']) * 1000
