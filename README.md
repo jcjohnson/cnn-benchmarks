@@ -20,10 +20,10 @@ to run on the GTX 1080, which has only 8GB of memory.
 The following models are benchmarked:
 
 |Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
-|---|---|---|---|---|---|
-|[AlexNet](#alexnet)|8|42.9|19.8|23.18|[[1]](#alexnet-paper)|
-|[VGG-16](#vgg-16)|16|25.6|8.1|232.55|[[2]](#vgg-paper)|
-|[VGG-19](#vgg-19)|19|25.5|8.0|281.69|[[2]](#vgg-paper)|
+|---|---:|---:|---:|---:|---|
+|[AlexNet](#alexnet)|8|42.90|19.80|23.18|[[1]](#alexnet-paper)|
+|[VGG-16](#vgg-16)|16|25.60|8.10|232.55|[[2]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|25.50|8.00|281.69|[[2]](#vgg-paper)|
 |[ResNet-18](#resnet-18)|18|30.43|10.76|47.07|[[3]](#resnet-cvpr)|
 |[ResNet-34](#resnet-34)|34|26.73|8.74|79.70|[[3]](#resnet-cvpr)|
 |[ResNet-50](#resnet-50)|50|24.01|7.02|153.90|[[3]](#resnet-cvpr)|
@@ -37,7 +37,7 @@ Speed is the total time for a forward and backward pass on a GTX 1080 with cuDNN
 We use the following GPUs for benchmarking:
 
 |GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
-|---|---|---|---|---|---|
+|---|---|---|---:|---:|---|
 |GeForce GTX Titan X|12GB GDDR5|Maxwell|3072|6.14|March 2015|
 |GeForce GTX 1080|8GB GDDRX5|Pascal|2560|8.87|May 2016|
 
@@ -53,7 +53,7 @@ not even implemented by the [torch/nn](https://github.com/torch/nn) backend; the
 benchmark AlexNet using cuDNN.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|7.36|15.83|23.18|
 |GeForce GTX TITAN X (cuDNN 5005)|7.02|16.69|23.71|
 
@@ -65,7 +65,7 @@ This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/211839e770f7b538e2d8#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|66.56|165.98|232.55|
 |GeForce GTX TITAN X (cuDNN 5005)|76.15|186.28|262.42|
 |GeForce GTX 1080 (nn)|143.81|378.61|522.42|
@@ -80,7 +80,7 @@ This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|80.39|201.31|281.69|
 |GeForce GTX TITAN X (cuDNN 5005)|93.83|229.57|323.40|
 |GeForce GTX 1080 (nn)|176.45|453.63|630.08|
@@ -95,7 +95,7 @@ This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|14.69|32.38|47.07|
 |GeForce GTX TITAN X (cuDNN 5005)|16.97|36.86|53.84|
 |GeForce GTX 1080 (nn)|43.05|78.95|122.00|
@@ -110,7 +110,7 @@ This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|24.83|54.86|79.70|
 |GeForce GTX TITAN X (cuDNN 5005)|28.72|63.22|91.94|
 |GeForce GTX 1080 (nn)|84.27|138.04|222.31|
@@ -125,7 +125,7 @@ This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|50.67|103.24|153.90|
 |GeForce GTX TITAN X (cuDNN 5005)|56.42|114.60|171.02|
 |GeForce GTX 1080 (nn)|109.81|201.66|311.47|
@@ -140,7 +140,7 @@ This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|77.77|157.56|235.33|
 |GeForce GTX TITAN X (cuDNN 5005)|88.30|171.82|260.12|
 |GeForce GTX 1080 (nn)|203.33|321.60|524.93|
@@ -155,7 +155,7 @@ This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|109.93|218.97|328.90|
 |GeForce GTX TITAN X (cuDNN 5005)|125.69|241.28|366.97|
 |GeForce GTX 1080 (nn)|299.12|460.95|760.07|
@@ -172,7 +172,7 @@ Even with a batch size of 16, the 8GB GTX 1080 did not have enough memory to run
 the model.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX TITAN X (cuDNN 5005)|171.15|322.66|493.82|
 |GeForce GTX TITAN X (nn)|491.69|806.95|1298.65|
 |CPU: Dual Intel Xeon E5-2630 v3|8666.43|13758.73|22425.16|
