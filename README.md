@@ -7,6 +7,10 @@ All benchmarks were run in Torch on a machine with dual Intel Xeon E5-2630 v3 pr
 (8 cores each plus hyperthreading means 32 threads) and 64GB RAM running Ubuntu 14.04 with
 the CUDA 8.0 Release Candidate.
 
+We benchmark all models with a minibatch size of 16 and an image size of 224 x 224;
+this allows direct comparisons between models, and allows all but the ResNet-200 model
+to run on the GTX 1080, which has only 8GB of memory.
+
 The following models are benchmarked:
 
 |Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
@@ -20,6 +24,24 @@ The following models are benchmarked:
 |[ResNet-101](#resnet-101)|101|22.44|6.21|235.33|[[3]](#resnet-cvpr)|
 |[ResNet-152](#resnet-152)|152|22.16|6.16|328.90|[[3]](#resnet-cvpr)|
 |[ResNet-200](#resnet-200)|200|21.66|5.79|-|[[4]](#resnet-eccv)|
+
+Top-1 and Top-5 error are single-crop error rates on the ILSVRC 2012 Validation set.
+Speed is the total time for a forward and backward pass on a GTX 1080 with cuDNN 5.0.
+
+We use the following GPUs for benchmarking:
+
+|GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
+|---|---|---|---|---|---|
+|Tesla K40c|12GB GDDR5|Kepler|2880|4.29|November 2013|
+|GeForce GTX Titan X|12GB GDDR5|Maxwell|3072|6.14|March 2015|
+|GeForce GTX 1080|8GB GDDRX5|Pascal|2560|8.87|May 2016|
+
+### Conclusions
+
+Some general conclusions from this benchmarking:
+
+- **GTX 1080 > Titan X**: Across all models, the GTX 1080 is about **10-13%** faster than the Titan X.
+- **ResNet > VGG**: ResNet-50 is significantly faster than VGG-16 and is more accurate than VGG-19; ResNet-101 is very slightly slower than VGG-16 but signifcantly more accurate than VGG-19.
 
 ### AlexNet
 (input 16 x 3 x 224 x 224)
