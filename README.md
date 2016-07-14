@@ -1,9 +1,16 @@
 # cnn-benchmarks
 
+
+
+
+
 All benchmarks were run on the same machine. The benchmark machine has dual Intel Xeon E5-2630 v3 processors
 (8 cores each plus hyperthreading means 32 threads) and 64GB RAM and is running Ubuntu 14.04 with the CUDA 8.0 Release Candidate.
 
-### alexnet (input 16 x 3 x 224 x 224)
+- [AlexNet](###AlexNet)
+
+### AlexNet
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
