@@ -1,16 +1,35 @@
 # cnn-benchmarks
 
+Benchmarks for different popular convolutional neural network models on CPU and different GPUs,
+with and without cuDNN.
 
+All benchmarks were run in Torch on a machine with dual Intel Xeon E5-2630 v3 processors
+(8 cores each plus hyperthreading means 32 threads) and 64GB RAM running Ubuntu 14.04 with
+the CUDA 8.0 Release Candidate.
 
+The following models are benchmarked:
 
-
-All benchmarks were run on the same machine. The benchmark machine has dual Intel Xeon E5-2630 v3 processors
-(8 cores each plus hyperthreading means 32 threads) and 64GB RAM and is running Ubuntu 14.04 with the CUDA 8.0 Release Candidate.
-
-- [AlexNet](###AlexNet)
+|Network|Layers|Top-1 error (single-crop)|Top-5 error (single-crop)|Citation|
+|---|---|---|---|---|
+|[AlexNet](#alexnet)|8|-|-|[[1]](#alexnet-paper)
+|[VGG-16](#vgg-16)|16|-|-|[[2]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|-|-|[[2]](#vgg-paper)|
+|[ResNet-18](#resnet-18)|18|-|-|[[3]](#resnet-cvpr)|
+|[ResNet-50](#resnet-50)|50|-|-|[[3]](#resnet-cvpr)|
+|[ResNet-101](#resnet-101)|101|-|-|[[3]](#resnet-cvpr)|
+|[ResNet-152](#resnet-152)|152|-|-|[[3]](#resnet-cvpr)|
+|[ResNet-200](#resnet-200)|200|-|-|[[4]](#resnet-eccv)|
 
 ### AlexNet
 (input 16 x 3 x 224 x 224)
+
+AlexNet has five convolutional layers and three fully-connected layers as described in the paper:
+
+We use the [BVLC AlexNet](https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet) from Caffe, which achieves
+a top-1 accuracy of **57.1%*
+
+
+
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -19,7 +38,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |Tesla K40c (cuDNN 5005)|18.32|18.32|61.48|
 
 
-### vgg16 (input 16 x 3 x 224 x 224)
+### VGG-16
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -32,7 +52,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|3101.76|3101.76|8495.48|
 
 
-### vgg19 (input 16 x 3 x 224 x 224)  
+### VGG-19
+(input 16 x 3 x 224 x 224)  
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -45,7 +66,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|3609.78|3609.78|9849.23|
 
 
-### resnet-18 (input 16 x 3 x 224 x 224)
+### ResNet-18
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -58,7 +80,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|847.46|847.46|2195.78|
 
 
-### resnet-34 (input 16 x 3 x 224 x 224)
+### ResNet-34
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -71,7 +94,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|1530.01|1530.01|3965.21|
 
 
-### resnet-50 (input 16 x 3 x 224 x 224)
+### ResNet-50
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -84,7 +108,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|2477.61|2477.61|6627.25|
 
 
-### resnet-101 (input 16 x 3 x 224 x 224)
+### ResNet-101
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -97,7 +122,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|4414.91|4414.91|11306.24|
 
 
-### resnet-152 (input 16 x 3 x 224 x 224)
+### ResNet-152
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -110,7 +136,8 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |CPU: Dual Intel Xeon E5-2630 v3|6572.17|6572.17|16872.78|
 
 
-### resnet-200 (input 16 x 3 x 224 x 224)
+### ResNet-200
+(input 16 x 3 x 224 x 224)
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---|---|
@@ -119,3 +146,18 @@ All benchmarks were run on the same machine. The benchmark machine has dual Inte
 |Tesla K40c (cuDNN 5005)|428.03|428.03|1485.24|
 |Tesla K40c (nn)|891.46|891.46|2578.20|
 |CPU: Dual Intel Xeon E5-2630 v3|8666.43|8666.43|22425.16|
+
+
+## Citations
+
+<a id='alexnet-paper'>
+[1] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. "ImageNet Classification with Deep Convolutional Neural Networks." NIPS 2012
+
+<a id='vgg-paper'>
+[2] Karen Simonyan and Andrew Zisserman. "Very Deep Convolutional Networks for Large-Scale Image Recognition." ICLR 2015
+
+<a id='resnet-cvpr'>
+[3] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Deep Residual Learning for Image Recognition." CVPR 2016.
+
+<a id='resnet-eccv'>
+[4] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Identity Mappings in Deep Residual Networks." ECCV 2016.
