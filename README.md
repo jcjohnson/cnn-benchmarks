@@ -9,17 +9,17 @@ the CUDA 8.0 Release Candidate.
 
 The following models are benchmarked:
 
-|Network|Layers|Top-1 error (single-crop)|Top-5 error (single-crop)|Citation|
-|---|---|---|---|---|
-|[AlexNet](#alexnet)|8|42.9|19.8|[[1]](#alexnet-paper)
-|[VGG-16](#vgg-16)|16|25.6|8.1|[[2]](#vgg-paper)|
-|[VGG-19](#vgg-19)|19|25.5|8.0|[[2]](#vgg-paper)|
-|[ResNet-18](#resnet-18)|18|30.43|10.76|[[3]](#resnet-cvpr)|
-|[ResNet-34](#resnet-34)|34|26.73|8.74|[[3]](#resnet-cvpr)|
-|[ResNet-50](#resnet-50)|50|24.01|7.02|[[3]](#resnet-cvpr)|
-|[ResNet-101](#resnet-101)|101|22.44|6.21|[[3]](#resnet-cvpr)|
-|[ResNet-152](#resnet-152)|152|22.16|6.16|[[3]](#resnet-cvpr)|
-|[ResNet-200](#resnet-200)|200|21.66|5.79|[[4]](#resnet-eccv)|
+|Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
+|---|---|---|---|---|---|
+|[AlexNet](#alexnet)|8|42.9|19.8|23.18|[[1]](#alexnet-paper)|
+|[VGG-16](#vgg-16)|16|25.6|8.1|232.55|[[2]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|25.5|8.0|281.69|[[2]](#vgg-paper)|
+|[ResNet-18](#resnet-18)|18|30.43|10.76|47.07|[[3]](#resnet-cvpr)|
+|[ResNet-34](#resnet-34)|34|26.73|8.74|79.70|[[3]](#resnet-cvpr)|
+|[ResNet-50](#resnet-50)|50|24.01|7.02|153.90|[[3]](#resnet-cvpr)|
+|[ResNet-101](#resnet-101)|101|22.44|6.21|235.33|[[3]](#resnet-cvpr)|
+|[ResNet-152](#resnet-152)|152|22.16|6.16|328.90|[[3]](#resnet-cvpr)|
+|[ResNet-200](#resnet-200)|200|21.66|5.79|-|[[4]](#resnet-eccv)|
 
 ### AlexNet
 (input 16 x 3 x 224 x 224)
