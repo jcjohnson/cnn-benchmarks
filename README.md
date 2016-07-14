@@ -7,7 +7,8 @@ Some general conclusions from this benchmarking:
 
 - **GTX 1080 > Titan X**: Across all models, the GTX 1080 is **1.10x to 1.15x** faster than the Titan X.
 - **ResNet > VGG**: ResNet-50 is significantly faster than VGG-16 and is more accurate than VGG-19; ResNet-101 is very slightly slower than VGG-16 but signifcantly more accurate than VGG-19.
-- **Always use cuDNN**: On the GTX 1080, cuDNN gives a **2.0x-2.8x speedup** over nn; on the Titan X, cuDNN gives a **2.2-3.0x** speedup over nn.
+- **Always use cuDNN**: On the GTX 1080, cuDNN is **2.0x to 2.8x** faster than nn; on the Titan X, cuDNN is **2.2x to 3.0x** faster than nn.
+- **GPUs are critical**: The GTX 1080 with cuDNN is **35x to 50x** faster than dual Xeon E5-2630 v3 CPUs.
 
 All benchmarks were run in Torch on a machine with dual Intel Xeon E5-2630 v3 processors
 (8 cores each plus hyperthreading means 32 threads) and 64GB RAM running Ubuntu 14.04 with
