@@ -1,7 +1,13 @@
 # cnn-benchmarks
 
-Benchmarks for different popular convolutional neural network models on CPU and different GPUs,
-with and without cuDNN.
+Benchmarks for popular convolutional neural network models on CPU and different GPUs, with and without cuDNN.
+
+Some general conclusions from this benchmarking:
+
+- **GTX 1080 > Titan X**: Across all models, the GTX 1080 is **1.10x to 1.15x** faster than the Titan X.
+- **ResNet > VGG**: ResNet-50 is **1.5x** faster than VGG-16 and more accurate than VGG-19 (7.02 vs 8.0); ResNet-101 is about the same speed as VGG-16 but much more accurate than VGG-19 (6.21 vs 8.0).
+- **Always use cuDNN**: On the GTX 1080, cuDNN is **2.0x to 2.8x** faster than nn; on the Titan X, cuDNN is **2.2x to 3.0x** faster than nn.
+- **GPUs are critical**: The GTX 1080 with cuDNN is **35x to 50x** faster than dual Xeon E5-2630 v3 CPUs.
 
 All benchmarks were run in Torch on a machine with dual Intel Xeon E5-2630 v3 processors
 (8 cores each plus hyperthreading means 32 threads) and 64GB RAM running Ubuntu 14.04 with
@@ -14,10 +20,10 @@ to run on the GTX 1080, which has only 8GB of memory.
 The following models are benchmarked:
 
 |Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
-|---|---|---|---|---|---|
-|[AlexNet](#alexnet)|8|42.9|19.8|23.18|[[1]](#alexnet-paper)|
-|[VGG-16](#vgg-16)|16|25.6|8.1|232.55|[[2]](#vgg-paper)|
-|[VGG-19](#vgg-19)|19|25.5|8.0|281.69|[[2]](#vgg-paper)|
+|---|---:|---:|---:|---:|---|
+|[AlexNet](#alexnet)|8|42.90|19.80|23.18|[[1]](#alexnet-paper)|
+|[VGG-16](#vgg-16)|16|25.60|8.10|232.55|[[2]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|25.50|8.00|281.69|[[2]](#vgg-paper)|
 |[ResNet-18](#resnet-18)|18|30.43|10.76|47.07|[[3]](#resnet-cvpr)|
 |[ResNet-34](#resnet-34)|34|26.73|8.74|79.70|[[3]](#resnet-cvpr)|
 |[ResNet-50](#resnet-50)|50|24.01|7.02|153.90|[[3]](#resnet-cvpr)|
@@ -31,19 +37,12 @@ Speed is the total time for a forward and backward pass on a GTX 1080 with cuDNN
 We use the following GPUs for benchmarking:
 
 |GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
-|---|---|---|---|---|---|
-|Tesla K40c|12GB GDDR5|Kepler|2880|4.29|November 2013|
+|---|---|---|---:|---:|---|
 |GeForce GTX Titan X|12GB GDDR5|Maxwell|3072|6.14|March 2015|
 |GeForce GTX 1080|8GB GDDRX5|Pascal|2560|8.87|May 2016|
 
-### Conclusions
 
-Some general conclusions from this benchmarking:
-
-- **GTX 1080 > Titan X**: Across all models, the GTX 1080 is about **10-13%** faster than the Titan X.
-- **ResNet > VGG**: ResNet-50 is significantly faster than VGG-16 and is more accurate than VGG-19; ResNet-101 is very slightly slower than VGG-16 but signifcantly more accurate than VGG-19.
-
-### AlexNet
+## AlexNet
 (input 16 x 3 x 224 x 224)
 
 We use the [BVLC AlexNet](https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet) from Caffe.
@@ -54,131 +53,116 @@ not even implemented by the [torch/nn](https://github.com/torch/nn) backend; the
 benchmark AlexNet using cuDNN.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|7.36|15.83|23.18|
 |GeForce GTX TITAN X (cuDNN 5005)|7.02|16.69|23.71|
-|Tesla K40c (cuDNN 5005)|18.32|43.16|61.48|
 
 
-### VGG-16
+## VGG-16
 (input 16 x 3 x 224 x 224)
 
 This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/211839e770f7b538e2d8#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|66.56|165.98|232.55|
 |GeForce GTX TITAN X (cuDNN 5005)|76.15|186.28|262.42|
 |GeForce GTX 1080 (nn)|143.81|378.61|522.42|
 |GeForce GTX TITAN X (nn)|172.56|415.41|587.97|
-|Tesla K40c (cuDNN 5005)|265.77|654.44|920.21|
-|Tesla K40c (nn)|340.79|890.22|1231.01|
 |CPU: Dual Intel Xeon E5-2630 v3|3101.76|5393.72|8495.48|
 
 
-### VGG-19
+## VGG-19
 (input 16 x 3 x 224 x 224)
 
 This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|80.39|201.31|281.69|
 |GeForce GTX TITAN X (cuDNN 5005)|93.83|229.57|323.40|
 |GeForce GTX 1080 (nn)|176.45|453.63|630.08|
 |GeForce GTX TITAN X (nn)|215.55|494.33|709.88|
-|Tesla K40c (cuDNN 5005)|325.18|804.48|1129.65|
-|Tesla K40c (nn)|416.65|1058.38|1475.02|
 |CPU: Dual Intel Xeon E5-2630 v3|3609.78|6239.45|9849.23|
 
 
-### ResNet-18
+## ResNet-18
 (input 16 x 3 x 224 x 224)
 
 This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|14.69|32.38|47.07|
 |GeForce GTX TITAN X (cuDNN 5005)|16.97|36.86|53.84|
 |GeForce GTX 1080 (nn)|43.05|78.95|122.00|
 |GeForce GTX TITAN X (nn)|55.20|95.57|150.76|
-|Tesla K40c (cuDNN 5005)|51.07|117.23|168.30|
-|Tesla K40c (nn)|97.85|211.07|308.91|
 |CPU: Dual Intel Xeon E5-2630 v3|847.46|1348.33|2195.78| 
 
 
-### ResNet-34
+## ResNet-34
 (input 16 x 3 x 224 x 224)
 
 This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|24.83|54.86|79.70|
 |GeForce GTX TITAN X (cuDNN 5005)|28.72|63.22|91.94|
 |GeForce GTX 1080 (nn)|84.27|138.04|222.31|
 |GeForce GTX TITAN X (nn)|109.75|164.94|274.69|
-|Tesla K40c (cuDNN 5005)|95.11|208.69|303.80|
-|Tesla K40c (nn)|190.80|380.57|571.37|
 |CPU: Dual Intel Xeon E5-2630 v3|1530.01|2435.20|3965.21|
 
 
-### ResNet-50
+## ResNet-50
 (input 16 x 3 x 224 x 224)
 
 This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|50.67|103.24|153.90|
 |GeForce GTX TITAN X (cuDNN 5005)|56.42|114.60|171.02|
 |GeForce GTX 1080 (nn)|109.81|201.66|311.47|
 |GeForce GTX TITAN X (nn)|136.37|245.99|382.36|
-|Tesla K40c (cuDNN 5005)|129.21|320.69|449.90|
-|Tesla K40c (nn)|250.91|518.88|769.79|
 |CPU: Dual Intel Xeon E5-2630 v3|2477.61|4149.64|6627.25|
 
 
-### ResNet-101
+## ResNet-101
 (input 16 x 3 x 224 x 224)
 
 This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|77.77|157.56|235.33|
 |GeForce GTX TITAN X (cuDNN 5005)|88.30|171.82|260.12|
 |GeForce GTX 1080 (nn)|203.33|321.60|524.93|
 |GeForce GTX TITAN X (nn)|258.26|404.16|662.42|
-|Tesla K40c (cuDNN 5005)|220.92|576.97|797.89|
-|Tesla K40c (nn)|477.37|895.69|1373.07|
 |CPU: Dual Intel Xeon E5-2630 v3|4414.91|6891.33|11306.24|
 
 
-### ResNet-152
+## ResNet-152
 (input 16 x 3 x 224 x 224)
 
 This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX 1080 (cuDNN 5005)|109.93|218.97|328.90|
 |GeForce GTX TITAN X (cuDNN 5005)|125.69|241.28|366.97|
 |GeForce GTX 1080 (nn)|299.12|460.95|760.07|
 |GeForce GTX TITAN X (nn)|379.79|579.63|959.42|
-|Tesla K40c (cuDNN 5005)|319.80|826.93|1146.73|
-|Tesla K40c (nn)|700.24|1281.99|1982.23|
 |CPU: Dual Intel Xeon E5-2630 v3|6572.17|10300.61|16872.78|
 
-### ResNet-200
+## ResNet-200
 (input 16 x 3 x 224 x 224)
 
 This is the 200-layer model described in [[4]](#resnet-eccv) and implemented in 
@@ -188,11 +172,9 @@ Even with a batch size of 16, the 8GB GTX 1080 did not have enough memory to run
 the model.
 
 |GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---|---|---|
+|---|---:|---:|---:|
 |GeForce GTX TITAN X (cuDNN 5005)|171.15|322.66|493.82|
 |GeForce GTX TITAN X (nn)|491.69|806.95|1298.65|
-|Tesla K40c (cuDNN 5005)|428.03|1057.21|1485.24|
-|Tesla K40c (nn)|891.46|1686.74|2578.20|
 |CPU: Dual Intel Xeon E5-2630 v3|8666.43|13758.73|22425.16|
 
 ## Citations

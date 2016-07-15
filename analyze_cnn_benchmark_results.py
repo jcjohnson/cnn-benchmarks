@@ -48,7 +48,7 @@ def main(args):
   for model in all_values['model']:
     for input_size in all_values['input_size']:
       table_header = '|GPU|Forward (ms)|Backward (ms)|Total (ms)|'
-      table_header2 = '|---|---|---|---|'
+      table_header2 = '|---|---:|---:|---:|'
       table_lines = {}
       for gpu_name in all_values['gpu_name']:
         for cudnn_version in all_values['cudnn_version']:
