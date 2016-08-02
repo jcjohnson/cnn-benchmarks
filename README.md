@@ -4,11 +4,11 @@ Benchmarks for popular convolutional neural network models on CPU and different 
 
 Some general conclusions from this benchmarking:
 
-- **Pascal Titan X > GTX 1080**: Across all models, the Pascal Titan X is **1.31x to 1.43x** faster than the GTX 1080 and **1.47x to 1.60x** faster than the Maxwell Titan X.
+- **Pascal Titan X > GTX 1080**: Across all models, the Pascal Titan X is **1.31x to 1.43x** faster than the GTX 1080 and **1.47x to 1.60x** faster than the Maxwell Titan X. This is without a doubt the best card you can get for deep learning right now.
 - **GTX 1080 > Maxwell Titan X**: Across all models, the GTX 1080 is **1.10x to 1.15x** faster than the Maxwell Titan X.
 - **ResNet > VGG**: ResNet-50 is **1.5x** faster than VGG-16 and more accurate than VGG-19 (7.02 vs 8.0); ResNet-101 is about the same speed as VGG-16 but much more accurate than VGG-19 (6.21 vs 8.0).
-- **Always use cuDNN**: On the GTX 1080, cuDNN is **2.0x to 2.8x** faster than nn; on the Maxwell Titan X, cuDNN is **2.2x to 3.0x** faster than nn.
-- **GPUs are critical**: The GTX 1080 with cuDNN is **35x to 50x** faster than dual Xeon E5-2630 v3 CPUs.
+- **Always use cuDNN**: On the Pascal Titan X, cuDNN is **2.2x to 3.0x** faster than nn; on the GTX 1080, cuDNN is **2.0x to 2.8x** faster than nn; on the Maxwell Titan X, cuDNN is **2.2x to 3.0x** faster than nn.
+- **GPUs are critical**: The Pascal Titan X with cuDNN is **49x to 74x** faster than dual Xeon E5-2630 v3 CPUs.
 
 All benchmarks were run in Torch. 
 The GTX 1080 and Maxwell Titan X benchmarks were run on a machine with dual
@@ -42,9 +42,9 @@ We use the following GPUs for benchmarking:
 
 |GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
 |---|---|---|---:|---:|---|
-|GeForce GTX Titan X|12GB GDDR5|Maxwell|3072|6.14|March 2015|
-|GeForce GTX 1080|8GB GDDRX5|Pascal|2560|8.87|May 2016|
-|TITAN X|12GB GDDRX5|Pascal|3584|10.16|August 2016|
+|[TITAN X](http://www.geforce.com/hardware/10series/titan-x-pascal)|12GB GDDRX5|Pascal|3584|10.16|August 2016|
+|[GeForce GTX 1080](http://www.geforce.com/hardware/10series/geforce-gtx-1080)|8GB GDDRX5|Pascal|2560|8.87|May 2016|
+|[GeForce GTX Titan X](http://www.geforce.com/hardware/desktop-gpus/geforce-gtx-titan-x)|12GB GDDR5|Maxwell|3072|6.14|March 2015|
 
 
 ## AlexNet
