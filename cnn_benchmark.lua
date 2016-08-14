@@ -9,7 +9,7 @@ local cmd = torch.CmdLine()
 cmd:option('-model_t7', 'models/vgg16.t7')
 cmd:option('-image_height', 224)
 cmd:option('-image_width', 224)
-cmd:option('-batch_size', 32)
+cmd:option('-batch_size', 16)
 
 -- Benchmark options
 cmd:option('-num_passes', 10)
