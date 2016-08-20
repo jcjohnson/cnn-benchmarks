@@ -36,7 +36,7 @@ The following models are benchmarked:
 |[ResNet-200](#resnet-200)|200|21.66|5.79|294.53|[[4]](#resnet-eccv)|
 
 Top-1 and Top-5 error are single-crop error rates on the ILSVRC 2012 Validation set.
-Speed is the total time for a forward and backward pass on a Pascal Titan X with cuDNN 5.0.
+Speed is the total time for a forward and backward pass on a Pascal Titan X with cuDNN 5.1.
 
 We use the following GPUs for benchmarking:
 
