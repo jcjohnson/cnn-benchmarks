@@ -2,8 +2,10 @@ import os, json, itertools, random, argparse
 
 
 DEFAULT_MODELS = ','.join([
+  'models/alexnet/alexnet.t7',
   'models/vgg16/vgg16.t7',
   'models/vgg19/vgg19.t7',
+  'models/googlenet/googlenet-v1.t7',
   'models/resnets/resnet-18.t7',
   'models/resnets/resnet-34.t7',
   'models/resnets/resnet-50.t7',
@@ -17,7 +19,7 @@ parser.add_argument('--gpus', default='0')
 parser.add_argument('--models', default=DEFAULT_MODELS)
 parser.add_argument('--batch_sizes', default='16')
 parser.add_argument('--use_cudnns', default='0,1')
-parser.add_argument('--output_dir', default='outputs/cnn')
+parser.add_argument('--output_dir', default='outputs')
 
 
 def main(args):
