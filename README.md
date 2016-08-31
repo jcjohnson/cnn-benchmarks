@@ -6,7 +6,7 @@ Some general conclusions from this benchmarking:
 
 - **Pascal Titan X > GTX 1080**: Across all models, the Pascal Titan X is **1.31x to 1.43x** faster than the GTX 1080 and **1.47x to 1.60x** faster than the Maxwell Titan X. This is without a doubt the best card you can get for deep learning right now.
 - **GTX 1080 > Maxwell Titan X**: Across all models, the GTX 1080 is **1.10x to 1.15x** faster than the Maxwell Titan X.
-- **ResNet > VGG**: ResNet-50 is faster than VGG-16 and more accurate than VGG-19 (7.02 vs 8.0); ResNet-101 is about the same speed as VGG-16 but much more accurate than VGG-19 (6.21 vs 8.0).
+- **ResNet > VGG**: ResNet-50 is faster than VGG-16 and more accurate than VGG-19 (7.02 vs 9.0); ResNet-101 is about the same speed as VGG-19 but much more accurate than VGG-16 (6.21 vs 9.0).
 - **Always use cuDNN**: On the Pascal Titan X, cuDNN is **2.2x to 3.0x** faster than nn; on the GTX 1080, cuDNN is **2.0x to 2.8x** faster than nn; on the Maxwell Titan X, cuDNN is **2.2x to 3.0x** faster than nn.
 - **GPUs are critical**: The Pascal Titan X with cuDNN is **49x to 74x** faster than dual Xeon E5-2630 v3 CPUs.
 
@@ -26,25 +26,30 @@ The following models are benchmarked:
 |Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
 |---|---:|---:|---:|---:|---|
 |[AlexNet](#alexnet)|8|42.90|19.80|14.56|[[1]](#alexnet-paper)|
-|[VGG-16](#vgg-16)|16|25.60|8.10|127.42|[[2]](#vgg-paper)|
-|[VGG-19](#vgg-19)|19|25.50|8.00|149.64|[[2]](#vgg-paper)|
-|[ResNet-18](#resnet-18)|18|30.43|10.76|31.39|[[3]](#resnet-cvpr)|
-|[ResNet-34](#resnet-34)|34|26.73|8.74|51.28|[[3]](#resnet-cvpr)|
-|[ResNet-50](#resnet-50)|50|24.01|7.02|105.12|[[3]](#resnet-cvpr)|
-|[ResNet-101](#resnet-101)|101|22.44|6.21|161.11|[[3]](#resnet-cvpr)|
-|[ResNet-152](#resnet-152)|152|22.16|6.16|223.75|[[3]](#resnet-cvpr)|
-|[ResNet-200](#resnet-200)|200|21.66|5.79|294.53|[[4]](#resnet-eccv)|
+|[GoogLeNet-V1](#googlenet-v1)|22|-|10.07|39.14|[[2]](#googlenet-v1-paper)|
+|[VGG-16](#vgg-16)|16|27.00|8.80|128.62|[[3]](#vgg-paper)|
+|[VGG-19](#vgg-19)|19|27.30|9.00|147.32|[[3]](#vgg-paper)|
+|[ResNet-18](#resnet-18)|18|30.43|10.76|31.54|[[4]](#resnet-cvpr)|
+|[ResNet-34](#resnet-34)|34|26.73|8.74|51.59|[[4]](#resnet-cvpr)|
+|[ResNet-50](#resnet-50)|50|24.01|7.02|103.58|[[4]](#resnet-cvpr)|
+|[ResNet-101](#resnet-101)|101|22.44|6.21|156.44|[[4]](#resnet-cvpr)|
+|[ResNet-152](#resnet-152)|152|22.16|6.16|217.91|[[4]](#resnet-cvpr)|
+|[ResNet-200](#resnet-200)|200|21.66|5.79|296.51|[[5]](#resnet-eccv)|
 
-Top-1 and Top-5 error are single-crop error rates on the ILSVRC 2012 Validation set.
+Top-1 and Top-5 error are single-crop error rates on the ILSVRC 2012 Validation set,
+except for VGG-16 and VGG-19 which instead use dense prediction on a 256x256 image.
+This gives the VGG models a slight advantage, but I was unable to find single-crop error
+rates for these models. All models perform better when using more than one crop at test-time.
+
 Speed is the total time for a forward and backward pass on a Pascal Titan X with cuDNN 5.1.
 
 We use the following GPUs for benchmarking:
 
 |GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
 |---|---|---|---:|---:|---|
-|[TITAN X](http://www.geforce.com/hardware/10series/titan-x-pascal)|12GB GDDRX5|Pascal|3584|10.16|August 2016|
-|[GeForce GTX 1080](http://www.geforce.com/hardware/10series/geforce-gtx-1080)|8GB GDDRX5|Pascal|2560|8.87|May 2016|
-|[GeForce GTX Titan X](http://www.geforce.com/hardware/desktop-gpus/geforce-gtx-titan-x)|12GB GDDR5|Maxwell|3072|6.14|March 2015|
+|[Pascal Titan X](http://www.geforce.com/hardware/10series/titan-x-pascal)|12GB GDDRX5|Pascal|3584|10.16|August 2016|
+|[GTX 1080](http://www.geforce.com/hardware/10series/geforce-gtx-1080)|8GB GDDRX5|Pascal|2560|8.87|May 2016|
+|[Maxwell Titan X](http://www.geforce.com/hardware/desktop-gpus/geforce-gtx-titan-x)|12GB GDDR5|Maxwell|3072|6.14|March 2015|
 
 
 ## AlexNet
@@ -57,182 +62,224 @@ GPUs, which had only 3GB of memory each. Grouped convolutions are no longer comm
 not even implemented by the [torch/nn](https://github.com/torch/nn) backend; therefore we can only
 benchmark AlexNet using cuDNN.
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|5.03|9.54|14.56|
-|TITAN X (cuDNN 5005)|5.29|10.83|16.12|
-|GeForce GTX TITAN X (cuDNN 5105)|6.45|13.82|20.27|
-|GeForce GTX 1080 (cuDNN 5105)|7.00|13.74|20.74|
-|GeForce GTX 1080 (cuDNN 5005)|7.36|15.83|23.18|
-|GeForce GTX TITAN X (cuDNN 5005)|7.02|16.69|23.71|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|5.04|9.52|14.56|
+|Pascal Titan X|5.0.05|5.32|10.90|16.23|
+|GTX 1080|5.1.05|7.00|13.74|20.74|
+|Maxwell Titan X|5.1.05|7.09|14.76|21.85|
+|GTX 1080|5.0.05|7.35|15.73|23.08|
+|Maxwell Titan X|5.0.05|7.55|17.78|25.33|
+|Maxwell Titan X|4.0.07|8.03|17.91|25.94|
+
+
+## GoogLeNet-V1
+(input 16 x 3 x 224 x 224)
+
+We use the Torch implementation of GoogLeNet-V1 from
+[soumith/inception.torch](https://github.com/soumith/inception.torch).
+
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|12.06|27.08|39.14|
+|Pascal Titan X|5.0.05|11.94|28.39|40.33|
+|GTX 1080|5.0.05|16.08|40.08|56.16|
+|Maxwell Titan X|5.1.05|19.29|42.69|61.98|
+|Maxwell Titan X|5.0.05|19.27|46.41|65.68|
+|Maxwell Titan X|4.0.07|21.04|49.41|70.45|
+|Pascal Titan X|None|57.46|85.90|143.36|
+|GTX 1080|None|63.03|102.31|165.34|
+|Maxwell Titan X|None|91.31|140.81|232.12|
 
 
 ## VGG-16
 (input 16 x 3 x 224 x 224)
 
-This is Model D in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
+This is Model D in [[3]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/211839e770f7b538e2d8#file-readme-md).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|41.31|86.10|127.42|
-|TITAN X (cuDNN 5005)|46.01|119.00|165.00|
-|GeForce GTX 1080 (cuDNN 5105)|59.37|123.42|182.79|
-|GeForce GTX TITAN X (cuDNN 5105)|62.01|129.77|191.78|
-|GeForce GTX 1080 (cuDNN 5005)|66.56|165.98|232.55|
-|GeForce GTX TITAN X (cuDNN 5005)|76.15|186.28|262.42|
-|TITAN X (nn)|102.49|269.81|372.30|
-|GeForce GTX 1080 (nn)|143.81|378.61|522.42|
-|GeForce GTX TITAN X (nn)|172.56|415.41|587.97|
-|CPU: Dual Intel Xeon E5-2630 v3|3101.76|5393.72|8495.48|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|41.59|87.03|128.62|
+|Pascal Titan X|5.0.05|46.16|111.23|157.39|
+|GTX 1080|5.1.05|59.37|123.42|182.79|
+|Maxwell Titan X|5.1.05|62.30|130.48|192.78|
+|GTX 1080|5.0.05|67.27|166.17|233.43|
+|Maxwell Titan X|5.0.05|75.80|186.47|262.27|
+|Maxwell Titan X|4.0.07|111.99|226.69|338.69|
+|Pascal Titan X|None|98.15|260.38|358.53|
+|GTX 1080|None|143.73|379.09|522.82|
+|Maxwell Titan X|None|172.61|415.87|588.47|
+|CPU: Dual Xeon E5-2630 v3|None|3101.76|5393.72|8495.48|
+
 
 
 ## VGG-19
 (input 16 x 3 x 224 x 224)
 
-This is Model E in [[2]](#vgg-paper) used in the ILSVRC-2014 competition,
+This is Model E in [[3]](#vgg-paper) used in the ILSVRC-2014 competition,
 [available here](https://gist.github.com/ksimonyan/3785162f95cd2d5fee77#file-readme-md).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|48.69|100.95|149.64|
-|TITAN X (cuDNN 5005)|55.88|145.94|201.82|
-|GeForce GTX 1080 (cuDNN 5005)|80.39|201.31|281.69|
-|GeForce GTX TITAN X (cuDNN 5005)|93.83|229.57|323.40|
-|TITAN X (nn)|126.86|318.54|445.40|
-|GeForce GTX 1080 (nn)|176.45|453.63|630.08|
-|GeForce GTX TITAN X (nn)|215.55|494.33|709.88|
-|CPU: Dual Intel Xeon E5-2630 v3|3609.78|6239.45|9849.23|
+
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|48.09|99.23|147.32|
+|Pascal Titan X|5.0.05|55.75|134.98|190.73|
+|GTX 1080|5.1.05|68.95|141.44|210.39|
+|Maxwell Titan X|5.1.05|73.66|151.48|225.14|
+|GTX 1080|5.0.05|79.79|202.02|281.81|
+|Maxwell Titan X|5.0.05|93.47|229.34|322.81|
+|Maxwell Titan X|4.0.07|139.01|279.21|418.22|
+|Pascal Titan X|None|121.69|318.39|440.08|
+|GTX 1080|None|176.36|453.22|629.57|
+|Maxwell Titan X|None|215.92|491.21|707.13|
+|CPU: Dual Xeon E5-2630 v3|None|3609.78|6239.45|9849.23|
+
 
 
 ## ResNet-18
 (input 16 x 3 x 224 x 224)
 
-This is the 18-layer model described in [[3]](#resnet-cvpr) and implemented in 
+This is the 18-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|10.02|21.37|31.39|
-|TITAN X (cuDNN 5005)|10.14|23.33|33.47|
-|GeForce GTX 1080 (cuDNN 5105)|14.62|29.32|43.94|
-|GeForce GTX 1080 (cuDNN 5005)|14.69|32.38|47.07|
-|GeForce GTX TITAN X (cuDNN 5105)|16.16|32.56|48.72|
-|GeForce GTX TITAN X (cuDNN 5005)|16.97|36.86|53.84|
-|TITAN X (nn)|34.55|62.39|96.94|
-|GeForce GTX 1080 (nn)|43.05|78.95|122.00|
-|GeForce GTX TITAN X (nn)|55.20|95.57|150.76|
-|CPU: Dual Intel Xeon E5-2630 v3|847.46|1348.33|2195.78| 
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|10.14|21.40|31.54|
+|Pascal Titan X|5.0.05|10.06|23.08|33.13|
+|GTX 1080|5.1.05|14.62|29.32|43.94|
+|GTX 1080|5.0.05|14.84|32.68|47.52|
+|Maxwell Titan X|5.1.05|16.87|34.55|51.42|
+|Maxwell Titan X|5.0.05|17.08|37.79|54.87|
+|Maxwell Titan X|4.0.07|21.54|42.26|63.80|
+|Pascal Titan X|None|34.76|61.64|96.40|
+|GTX 1080|None|42.94|79.17|122.10|
+|Maxwell Titan X|None|55.82|96.01|151.82|
+|CPU: Dual Xeon E5-2630 v3|None|847.46|1348.33|2195.78|
+
 
 
 ## ResNet-34
 (input 16 x 3 x 224 x 224)
 
-This is the 34-layer model described in [[3]](#resnet-cvpr) and implemented in 
+This is the 34-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|16.92|34.36|51.28|
-|TITAN X (cuDNN 5005)|17.36|40.09|57.45|
-|GeForce GTX 1080 (cuDNN 5105)|24.50|47.59|72.09|
-|GeForce GTX 1080 (cuDNN 5005)|24.83|54.86|79.70|
-|GeForce GTX TITAN X (cuDNN 5105)|27.15|52.85|80.01|
-|GeForce GTX TITAN X (cuDNN 5005)|28.72|63.22|91.94|
-|TITAN X (nn)|66.46|107.99|174.45|
-|GeForce GTX 1080 (nn)|84.27|138.04|222.31|
-|GeForce GTX TITAN X (nn)|109.75|164.94|274.69|
-|CPU: Dual Intel Xeon E5-2630 v3|1530.01|2435.20|3965.21|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|17.01|34.58|51.59|
+|Pascal Titan X|5.0.05|16.91|38.67|55.58|
+|GTX 1080|5.1.05|24.50|47.59|72.09|
+|GTX 1080|5.0.05|24.76|55.00|79.76|
+|Maxwell Titan X|5.1.05|27.33|52.90|80.23|
+|Maxwell Titan X|5.0.05|28.79|63.19|91.98|
+|Maxwell Titan X|4.0.07|40.12|76.00|116.11|
+|Pascal Titan X|None|66.56|106.42|172.98|
+|GTX 1080|None|82.71|137.42|220.13|
+|Maxwell Titan X|None|108.95|166.19|275.13|
+|CPU: Dual Xeon E5-2630 v3|None|1530.01|2435.20|3965.21|
 
 
 ## ResNet-50
 (input 16 x 3 x 224 x 224)
 
-This is the 50-layer model described in [[3]](#resnet-cvpr) and implemented in 
+This is the 50-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|34.72|70.40|105.12|
-|TITAN X (cuDNN 5005)|36.25|73.93|110.18|
-|GeForce GTX 1080 (cuDNN 5105)|50.64|99.18|149.82|
-|GeForce GTX 1080 (cuDNN 5005)|50.67|103.24|153.90|
-|GeForce GTX TITAN X (cuDNN 5105)|55.61|103.82|159.43|
-|GeForce GTX TITAN X (cuDNN 5005)|56.42|114.60|171.02|
-|TITAN X (nn)|87.81|161.03|248.83|
-|GeForce GTX 1080 (nn)|109.81|201.66|311.47|
-|GeForce GTX TITAN X (nn)|136.37|245.99|382.36|
-|CPU: Dual Intel Xeon E5-2630 v3|2477.61|4149.64|6627.25|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|35.03|68.54|103.58|
+|Pascal Titan X|5.0.05|35.03|70.76|105.78|
+|GTX 1080|5.1.05|50.64|99.18|149.82|
+|GTX 1080|5.0.05|50.76|103.35|154.11|
+|Maxwell Titan X|5.1.05|55.75|103.87|159.62|
+|Maxwell Titan X|5.0.05|56.30|109.75|166.05|
+|Maxwell Titan X|4.0.07|62.03|116.81|178.84|
+|Pascal Titan X|None|87.62|158.96|246.58|
+|GTX 1080|None|109.79|201.40|311.18|
+|Maxwell Titan X|None|137.14|247.65|384.79|
+|CPU: Dual Xeon E5-2630 v3|None|2477.61|4149.64|6627.25|
+
 
 
 ## ResNet-101
 (input 16 x 3 x 224 x 224)
 
-This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
+This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|54.38|106.73|161.11|
-|TITAN X (cuDNN 5005)|54.48|113.14|167.61|
-|GeForce GTX 1080 (cuDNN 5105)|77.59|148.21|225.80|
-|GeForce GTX 1080 (cuDNN 5005)|77.77|157.56|235.33|
-|GeForce GTX TITAN X (cuDNN 5105)|87.32|159.06|246.38|
-|GeForce GTX TITAN X (cuDNN 5005)|88.30|171.82|260.12|
-|TITAN X (nn)|165.37|262.78|428.15|
-|GeForce GTX 1080 (nn)|203.33|321.60|524.93|
-|GeForce GTX TITAN X (nn)|258.26|404.16|662.42|
-|CPU: Dual Intel Xeon E5-2630 v3|4414.91|6891.33|11306.24|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|53.38|103.06|156.44|
+|Pascal Titan X|5.0.05|53.28|108.20|161.48|
+|GTX 1080|5.1.05|77.59|148.21|225.80|
+|GTX 1080|5.0.05|77.39|158.19|235.58|
+|Maxwell Titan X|5.1.05|87.76|159.73|247.49|
+|Maxwell Titan X|5.0.05|88.45|172.12|260.57|
+|Maxwell Titan X|4.0.07|108.96|189.93|298.90|
+|Pascal Titan X|None|161.55|257.57|419.11|
+|GTX 1080|None|203.19|322.48|525.67|
+|Maxwell Titan X|None|260.48|453.45|713.93|
+|CPU: Dual Xeon E5-2630 v3|None|4414.91|6891.33|11306.24|
+
 
 
 ## ResNet-152
 (input 16 x 3 x 224 x 224)
 
-This is the 101-layer model described in [[3]](#resnet-cvpr) and implemented in 
+This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|77.38|146.37|223.75|
-|TITAN X (cuDNN 5005)|75.87|153.62|229.49|
-|GeForce GTX 1080 (cuDNN 5105)|109.32|204.98|314.30|
-|GeForce GTX 1080 (cuDNN 5005)|109.93|218.97|328.90|
-|GeForce GTX TITAN X (cuDNN 5105)|123.92|220.61|344.53|
-|GeForce GTX TITAN X (cuDNN 5005)|125.69|241.28|366.97|
-|TITAN X (nn)|250.93|390.46|641.40|
-|GeForce GTX 1080 (nn)|299.12|460.95|760.07|
-|GeForce GTX TITAN X (nn)|379.79|579.63|959.42|
-|CPU: Dual Intel Xeon E5-2630 v3|6572.17|10300.61|16872.78|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|75.45|142.47|217.91|
+|Pascal Titan X|5.0.05|75.12|150.08|225.20|
+|GTX 1080|5.1.05|109.32|204.98|314.30|
+|GTX 1080|5.0.05|109.64|218.62|328.26|
+|Maxwell Titan X|5.1.05|124.04|221.41|345.45|
+|Maxwell Titan X|5.0.05|124.88|240.16|365.03|
+|Maxwell Titan X|4.0.07|150.90|268.64|419.54|
+|Pascal Titan X|None|238.04|371.40|609.43|
+|GTX 1080|None|299.05|461.67|760.72|
+|Maxwell Titan X|None|382.39|583.83|966.22|
+|CPU: Dual Xeon E5-2630 v3|None|6572.17|10300.61|16872.78|
+
 
 ## ResNet-200
 (input 16 x 3 x 224 x 224)
 
-This is the 200-layer model described in [[4]](#resnet-eccv) and implemented in 
+This is the 200-layer model described in [[5]](#resnet-eccv) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 Even with a batch size of 16, the 8GB GTX 1080 did not have enough memory to run
 the model.
 
-|GPU|Forward (ms)|Backward (ms)|Total (ms)|
-|---|---:|---:|---:|
-|TITAN X (cuDNN 5105)|103.93|190.61|294.53|
-|TITAN X (cuDNN 5005)|104.98|205.82|310.80|
-|GeForce GTX TITAN X (cuDNN 5105)|169.13|294.97|464.10|
-|GeForce GTX TITAN X (cuDNN 5005)|171.15|322.66|493.82|
-|TITAN X (nn)|313.90|522.16|836.05|
-|GeForce GTX TITAN X (nn)|491.69|806.95|1298.65|
-|CPU: Dual Intel Xeon E5-2630 v3|8666.43|13758.73|22425.16|
+|GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
+|---|---|---:|---:|---:|
+|Pascal Titan X|5.1.05|104.74|191.77|296.51|
+|Pascal Titan X|5.0.05|104.36|201.92|306.27|
+|Maxwell Titan X|5.0.05|170.03|320.80|490.83|
+|Maxwell Titan X|5.1.05|169.62|383.80|553.42|
+|Maxwell Titan X|4.0.07|203.52|356.35|559.87|
+|Pascal Titan X|None|314.77|519.72|834.48|
+|Maxwell Titan X|None|497.57|953.94|1451.51|
+|CPU: Dual Xeon E5-2630 v3|None|8666.43|13758.73|22425.16|
 
 ## Citations
 
 <a id='alexnet-paper'>
 [1] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. "ImageNet Classification with Deep Convolutional Neural Networks." NIPS 2012
 
+<a id='googlenet-v1-paper'>
+[2] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed,
+Dragomir Anguelov, Dumitru Erhan, Andrew Rabinovich.
+"Going Deeper with Convolutions." CVPR 2015.
+
 <a id='vgg-paper'>
-[2] Karen Simonyan and Andrew Zisserman. "Very Deep Convolutional Networks for Large-Scale Image Recognition." ICLR 2015
+[3] Karen Simonyan and Andrew Zisserman. "Very Deep Convolutional Networks for Large-Scale Image Recognition." ICLR 2015
 
 <a id='resnet-cvpr'>
-[3] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Deep Residual Learning for Image Recognition." CVPR 2016.
+[4] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Deep Residual Learning for Image Recognition." CVPR 2016.
 
 <a id='resnet-eccv'>
-[4] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Identity Mappings in Deep Residual Networks." ECCV 2016.
+[5] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Identity Mappings in Deep Residual Networks." ECCV 2016.
