@@ -26,7 +26,7 @@ The following models are benchmarked:
 |Network|Layers|Top-1 error|Top-5 error|Speed (ms)|Citation|
 |---|---:|---:|---:|---:|---|
 |[AlexNet](#alexnet)|8|42.90|19.80|14.56|[[1]](#alexnet-paper)|
-|[GoogLeNet-V1](#googlenet-v1)|22|-|10.07|39.14|[[2]](#googlenet-v1-paper)|
+|[Inception-V1](#inception-v1)|22|-|10.07|39.14|[[2]](#inception-v1-paper)|
 |[VGG-16](#vgg-16)|16|27.00|8.80|128.62|[[3]](#vgg-paper)|
 |[VGG-19](#vgg-19)|19|27.30|9.00|147.32|[[3]](#vgg-paper)|
 |[ResNet-18](#resnet-18)|18|30.43|10.76|31.54|[[4]](#resnet-cvpr)|
@@ -73,10 +73,10 @@ benchmark AlexNet using cuDNN.
 |Maxwell Titan X|4.0.07|8.03|17.91|25.94|
 
 
-## GoogLeNet-V1
+## Inception-V1
 (input 16 x 3 x 224 x 224)
 
-We use the Torch implementation of GoogLeNet-V1 from
+We use the Torch implementation of Inception-V1 from
 [soumith/inception.torch](https://github.com/soumith/inception.torch).
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
@@ -270,7 +270,7 @@ the model.
 <a id='alexnet-paper'>
 [1] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. "ImageNet Classification with Deep Convolutional Neural Networks." NIPS 2012
 
-<a id='googlenet-v1-paper'>
+<a id='inception-v1-paper'>
 [2] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed,
 Dragomir Anguelov, Dumitru Erhan, Andrew Rabinovich.
 "Going Deeper with Convolutions." CVPR 2015.
