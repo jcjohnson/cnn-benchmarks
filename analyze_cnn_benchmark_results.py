@@ -18,6 +18,7 @@ cudnn_map = {
 
 # Maps the GPU name reported by the driver to a more friendly string
 gpu_name_map = {
+  'Tesla P100-SXM2-16GB': 'Tesla P100',
   'TITAN X': 'Pascal Titan X',
   'GeForce GTX TITAN X': 'Maxwell Titan X',
   'GeForce GTX 1080': 'GTX 1080',
