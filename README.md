@@ -43,6 +43,9 @@ rates for these models. All models perform better when using more than one crop 
 
 Speed is the total time for a forward and backward pass on a Pascal Titan X with cuDNN 5.1.
 
+You can download the model files used for benchmarking [here](https://drive.google.com/open?id=0Byvt-AfX75o1STUxZTFpMU10djA) (2.1 GB);
+these were converted from Caffe or Torch checkpoints using the `convert_model.lua` script.
+
 We use the following GPUs for benchmarking:
 
 |GPU|Memory|Architecture|CUDA Cores|FP32 TFLOPS|Release Date|
