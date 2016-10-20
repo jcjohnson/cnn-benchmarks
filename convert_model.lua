@@ -12,6 +12,7 @@ cmd:option('-input_caffemodel', '')
 cmd:option('-input_t7', '')
 cmd:option('-output_t7', '')
 cmd:option('-backend', 'nn')
+cmd:option('-clear_gradients', 1)
 local opt = cmd:parse(arg)
 
 
@@ -32,5 +33,7 @@ local backend_map = {nn=nn, cudnn=cudnn}
 cudnn.convert(model, backend_map[opt.backend])
 model:float()
 model:clearState()
-utils.clear_gradients(model)
+if opt.clear_gradients == 1 then
+  utils.clear_gradients(model)
+end
 torch.save(opt.output_t7, model)
