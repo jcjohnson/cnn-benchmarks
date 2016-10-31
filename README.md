@@ -230,7 +230,7 @@ This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in
 ## ResNet-152
 (input 16 x 3 x 224 x 224)
 
-This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in 
+This is the 152-layer model described in [[4]](#resnet-cvpr) and implemented in 
 [fb.resnet.torch](https://github.com/facebook/fb.resnet.torch).
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
