@@ -23,7 +23,7 @@ end
 local model = nil
 if opt.input_prototxt ~= '' then
   if opt.input_caffemodel == '' then
-    error('Must provide both -input_prototxt and -input_t7')
+    error('Must provide both -input_prototxt and -input_caffemodel')
   end
   model = loadcaffe.load(opt.input_prototxt, opt.input_caffemodel, opt.backend)
 elseif opt.input_t7 then
