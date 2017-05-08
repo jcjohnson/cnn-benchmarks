@@ -52,7 +52,7 @@ We use the following GPUs for benchmarking:
 |---|---|---|---:|---:|---|
 |[Pascal Titan X](http://www.geforce.com/hardware/10series/titan-x-pascal)|12GB GDDRX5|Pascal|3584|10.16|August 2016|
 |[GTX 1080](http://www.geforce.com/hardware/10series/geforce-gtx-1080)|8GB GDDRX5|Pascal|2560|8.87|May 2016|
-|[GTX 1080 Titan](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/)|11GB GDDRX5|Pascal|3584|10.6|March 2017|
+|[GTX 1080 Ti](https://www.nvidia.com/en-us/geforce/products/10series/geforce-gtx-1080-ti/)|11GB GDDRX5|Pascal|3584|10.6|March 2017|
 |[Maxwell Titan X](http://www.geforce.com/hardware/desktop-gpus/geforce-gtx-titan-x)|12GB GDDR5|Maxwell|3072|6.14|March 2015|
 
 
@@ -68,7 +68,7 @@ benchmark AlexNet using cuDNN.
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|4.31|9.58|13.89|
+|GTX 1080 Ti|5.1.10|4.31|9.58|13.89|
 |Pascal Titan X|5.1.05|5.04|9.52|14.56|
 |Pascal Titan X|5.0.05|5.32|10.90|16.23|
 |GTX 1080|5.1.05|7.00|13.74|20.74|
@@ -86,14 +86,14 @@ We use the Torch implementation of Inception-V1 from
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|11.50|25.37|36.87|
+|GTX 1080 Ti|5.1.10|11.50|25.37|36.87|
 |Pascal Titan X|5.1.05|12.06|27.08|39.14|
 |Pascal Titan X|5.0.05|11.94|28.39|40.33|
 |GTX 1080|5.0.05|16.08|40.08|56.16|
 |Maxwell Titan X|5.1.05|19.29|42.69|61.98|
 |Maxwell Titan X|5.0.05|19.27|46.41|65.68|
 |Maxwell Titan X|4.0.07|21.04|49.41|70.45|
-|GTX 1080 Titan|None|56.34|85.30|141.64|
+|GTX 1080 Ti|None|56.34|85.30|141.64|
 |Pascal Titan X|None|57.46|85.90|143.36|
 |GTX 1080|None|63.03|102.31|165.34|
 |Maxwell Titan X|None|91.31|140.81|232.12|
@@ -107,7 +107,7 @@ This is Model D in [[3]](#vgg-paper) used in the ILSVRC-2014 competition,
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|41.23|86.91|128.14|
+|GTX 1080 Ti|5.1.10|41.23|86.91|128.14|
 |Pascal Titan X|5.1.05|41.59|87.03|128.62|
 |Pascal Titan X|5.0.05|46.16|111.23|157.39|
 |GTX 1080|5.1.05|59.37|123.42|182.79|
@@ -132,7 +132,7 @@ This is Model E in [[3]](#vgg-paper) used in the ILSVRC-2014 competition,
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
 |Pascal Titan X|5.1.05|48.09|99.23|147.32|
-|GTX 1080 Titan|5.1.10|48.15|100.04|148.19|
+|GTX 1080 Ti|5.1.10|48.15|100.04|148.19|
 |Pascal Titan X|5.0.05|55.75|134.98|190.73|
 |GTX 1080|5.1.05|68.95|141.44|210.39|
 |Maxwell Titan X|5.1.05|73.66|151.48|225.14|
@@ -155,7 +155,7 @@ This is the 18-layer model described in [[4]](#resnet-cvpr) and implemented in
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
 |Pascal Titan X|5.1.05|10.14|21.40|31.54|
-|GTX 1080 Titan|5.1.10|10.45|22.34|32.78|
+|GTX 1080 Ti|5.1.10|10.45|22.34|32.78|
 |Pascal Titan X|5.0.05|10.06|23.08|33.13|
 |GTX 1080|5.1.05|14.62|29.32|43.94|
 |GTX 1080|5.0.05|14.84|32.68|47.52|
@@ -163,7 +163,7 @@ This is the 18-layer model described in [[4]](#resnet-cvpr) and implemented in
 |Maxwell Titan X|5.0.05|17.08|37.79|54.87|
 |Maxwell Titan X|4.0.07|21.54|42.26|63.80|
 |Pascal Titan X|None|34.76|61.64|96.40|
-|GTX 1080 Titan|None|50.04|65.99|116.03|
+|GTX 1080 Ti|None|50.04|65.99|116.03|
 |GTX 1080|None|42.94|79.17|122.10|
 |Maxwell Titan X|None|55.82|96.01|151.82|
 |CPU: Dual Xeon E5-2630 v3|None|847.46|1348.33|2195.78|
@@ -178,7 +178,7 @@ This is the 34-layer model described in [[4]](#resnet-cvpr) and implemented in
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|16.71|34.60|51.31|
+|GTX 1080 Ti|5.1.10|16.71|34.60|51.31|
 |Pascal Titan X|5.1.05|17.01|34.58|51.59|
 |Pascal Titan X|5.0.05|16.91|38.67|55.58|
 |GTX 1080|5.1.05|24.50|47.59|72.09|
@@ -187,7 +187,7 @@ This is the 34-layer model described in [[4]](#resnet-cvpr) and implemented in
 |Maxwell Titan X|5.0.05|28.79|63.19|91.98|
 |Maxwell Titan X|4.0.07|40.12|76.00|116.11|
 |Pascal Titan X|None|66.56|106.42|172.98|
-|GTX 1080 Titan|None|86.30|109.43|195.73|
+|GTX 1080 Ti|None|86.30|109.43|195.73|
 |GTX 1080|None|82.71|137.42|220.13|
 |Maxwell Titan X|None|108.95|166.19|275.13|
 |CPU: Dual Xeon E5-2630 v3|None|1530.01|2435.20|3965.21|
@@ -201,7 +201,7 @@ This is the 50-layer model described in [[4]](#resnet-cvpr) and implemented in
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|34.14|67.06|101.21|
+|GTX 1080 Ti|5.1.10|34.14|67.06|101.21|
 |Pascal Titan X|5.1.05|35.03|68.54|103.58|
 |Pascal Titan X|5.0.05|35.03|70.76|105.78|
 |GTX 1080|5.1.05|50.64|99.18|149.82|
@@ -210,7 +210,7 @@ This is the 50-layer model described in [[4]](#resnet-cvpr) and implemented in
 |Maxwell Titan X|5.0.05|56.30|109.75|166.05|
 |Maxwell Titan X|4.0.07|62.03|116.81|178.84|
 |Pascal Titan X|None|87.62|158.96|246.58|
-|GTX 1080 Titan|None|99.90|177.58|277.47|
+|GTX 1080 Ti|None|99.90|177.58|277.47|
 |GTX 1080|None|109.79|201.40|311.18|
 |Maxwell Titan X|None|137.14|247.65|384.79|
 |CPU: Dual Xeon E5-2630 v3|None|2477.61|4149.64|6627.25|
@@ -225,7 +225,7 @@ This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|52.18|102.08|154.26|
+|GTX 1080 Ti|5.1.10|52.18|102.08|154.26|
 |Pascal Titan X|5.1.05|53.38|103.06|156.44|
 |Pascal Titan X|5.0.05|53.28|108.20|161.48|
 |GTX 1080|5.1.05|77.59|148.21|225.80|
@@ -234,7 +234,7 @@ This is the 101-layer model described in [[4]](#resnet-cvpr) and implemented in
 |Maxwell Titan X|5.0.05|88.45|172.12|260.57|
 |Maxwell Titan X|4.0.07|108.96|189.93|298.90|
 |Pascal Titan X|None|161.55|257.57|419.11|
-|GTX 1080 Titan|None|162.03|266.77|428.81|
+|GTX 1080 Ti|None|162.03|266.77|428.81|
 |GTX 1080|None|203.19|322.48|525.67|
 |Maxwell Titan X|None|260.48|453.45|713.93|
 |CPU: Dual Xeon E5-2630 v3|None|4414.91|6891.33|11306.24|
@@ -249,7 +249,7 @@ This is the 152-layer model described in [[4]](#resnet-cvpr) and implemented in
 
 |GPU|cuDNN|Forward (ms)|Backward (ms)|Total (ms)|
 |---|---|---:|---:|---:|
-|GTX 1080 Titan|5.1.10|73.52|142.02|215.54|
+|GTX 1080 Ti|5.1.10|73.52|142.02|215.54|
 |Pascal Titan X|5.1.05|75.45|142.47|217.91|
 |Pascal Titan X|5.0.05|75.12|150.08|225.20|
 |GTX 1080|5.1.05|109.32|204.98|314.30|
@@ -258,7 +258,7 @@ This is the 152-layer model described in [[4]](#resnet-cvpr) and implemented in
 |Maxwell Titan X|5.0.05|124.88|240.16|365.03|
 |Maxwell Titan X|4.0.07|150.90|268.64|419.54|
 |Pascal Titan X|None|238.04|371.40|609.43|
-|GTX 1080 Titan|None|225.36|368.42|593.79|
+|GTX 1080 Ti|None|225.36|368.42|593.79|
 |GTX 1080|None|299.05|461.67|760.72|
 |Maxwell Titan X|None|382.39|583.83|966.22|
 |CPU: Dual Xeon E5-2630 v3|None|6572.17|10300.61|16872.78|

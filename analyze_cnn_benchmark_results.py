@@ -23,7 +23,7 @@ gpu_name_map = {
   'TITAN X': 'Pascal Titan X',
   'GeForce GTX TITAN X': 'Maxwell Titan X',
   'GeForce GTX 1080': 'GTX 1080',
-  'GeForce GTX 1080 Ti': 'GTX 1080 Titan',
+  'GeForce GTX 1080 Ti': 'GTX 1080 Ti',
   'cpu': 'CPU: Dual Xeon E5-2630 v3',
 }
 
