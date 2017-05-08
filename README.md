@@ -16,6 +16,8 @@ Intel Xeon E5-2630 v3 processors (8 cores each plus hyperthreading means 32
 threads) and 64GB RAM running Ubuntu 14.04 with the CUDA 8.0 Release Candidate.
 The Pascal Titan X benchmarks were run on a machine with an Intel Core i5-6500
 CPU and 16GB RAM running Ubuntu 16.04 with the CUDA 8.0 Release Candidate.
+The GTX 1080 Ti benchmarks were run on a machine with an Intel Core i7-7700 CPU
+and 64GB RAM running Ubuntu 16.04 with the CUDA 8.0 release.
 
 We benchmark all models with a minibatch size of 16 and an image size of 224 x 224;
 this allows direct comparisons between models, and allows all but the ResNet-200 model
