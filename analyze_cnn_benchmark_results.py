@@ -12,6 +12,7 @@ args = parser.parse_args()
 cudnn_map = {
   5005: '5.0.05',
   5105: '5.1.05',
+  5110: '5.1.10',
   4007: '4.0.07',
   'none': 'None',
 }
@@ -22,6 +23,7 @@ gpu_name_map = {
   'TITAN X': 'Pascal Titan X',
   'GeForce GTX TITAN X': 'Maxwell Titan X',
   'GeForce GTX 1080': 'GTX 1080',
+  'GeForce GTX 1080 Ti': 'GTX 1080 Titan',
   'cpu': 'CPU: Dual Xeon E5-2630 v3',
 }
 
