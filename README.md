@@ -290,17 +290,21 @@ the model.
 
 <a id='alexnet-paper'>
 [1] Alex Krizhevsky, Ilya Sutskever, and Geoffrey E. Hinton. "ImageNet Classification with Deep Convolutional Neural Networks." NIPS 2012
+<br>
 
 <a id='inception-v1-paper'>
 [2] Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed,
 Dragomir Anguelov, Dumitru Erhan, Andrew Rabinovich.
 "Going Deeper with Convolutions." CVPR 2015.
+<br>
 
 <a id='vgg-paper'>
 [3] Karen Simonyan and Andrew Zisserman. "Very Deep Convolutional Networks for Large-Scale Image Recognition." ICLR 2015
+<br>
 
 <a id='resnet-cvpr'>
 [4] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Deep Residual Learning for Image Recognition." CVPR 2016.
+<br>
 
 <a id='resnet-eccv'>
 [5] Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. "Identity Mappings in Deep Residual Networks." ECCV 2016.
