@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import division
 import argparse
 import time
 import torch
@@ -66,7 +68,7 @@ def main(args):
       print('Total: %.2f ms +- %.2f ms' % (t_mean, t_std))
 
 
-def run_model(args, model, dtype):
+def run_model(args, model, dtype, verbose=False):
   if not hasattr(torchvision.models, model):
     raise ValueError('Invalid model "%s"' % model)
   model = getattr(torchvision.models, model)().type(dtype)
@@ -79,7 +81,8 @@ def run_model(args, model, dtype):
   forward_times, backward_times = [], []
   total_batches = args.num_warmup + args.num_batches
   for t in range(total_batches):
-    print('Running batch %d / %d' % (t + 1, total_batches))
+    if verbose:
+      print('Running batch %d / %d' % (t + 1, total_batches))
     x = torch.randn(N, C, H, W)
     x = Variable(x.type(dtype))
 
