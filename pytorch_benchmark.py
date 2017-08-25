@@ -1,6 +1,7 @@
 import argparse
 import time
 import torch
+import torch.nn as nn
 import torchvision.models
 from torch.autograd import Variable
 
@@ -16,6 +17,7 @@ parser.add_argument('--mode', default='train', choices=['train', 'test'])
 parser.add_argument('--use_gpu', default=1, type=int)
 parser.add_argument('--cudnn_benchmark', default=1, type=int)
 parser.add_argument('--precisions', default='fp16,fp32')
+parser.add_argument('--batchnorm_workaround', default=1, type=int)
 
 
 def get_dtype(use_gpu, precision):
@@ -31,7 +33,20 @@ def get_dtype(use_gpu, precision):
   return dtypes[key]
 
 
+class DummyBatchNorm2d(nn.Module):
+  def __init__(self, channels, *args, **kwargs):
+    super(DummyBatchNorm2d, self).__init__()
+    self.weight = nn.Parameter(torch.zeros(channels))
+    self.bias = nn.Parameter(torch.ones(channels))
+  def forward(self, x):
+    return x
+
+
+
 def main(args):
+  if args.batchnorm_workaround == 1:
+    torch.nn.BatchNorm2d = DummyBatchNorm2d
+
   if args.use_gpu == 1:
     if args.cudnn_benchmark == 1:
       torch.backends.cudnn.benchmark = True
