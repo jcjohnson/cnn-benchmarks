@@ -57,10 +57,13 @@ def main(args):
       dtype = get_dtype(args.use_gpu, precision)
       print('Running %s with dtype %s' % (model, dtype))
       forward_times, backward_times = run_model(args, model, dtype)
+      total_times = forward_times + backward_times
       f_mean, f_std = forward_times.mean(), forward_times.std()
       b_mean, b_std = backward_times.mean(), backward_times.std()
+      t_mean, t_std = total_times.mean(), total_times.std()
       print('Forward: %.2f ms +- %.2f ms' % (f_mean, f_std))
       print('Backward: %.2f ms +- %.2f ms' % (b_mean, b_std))
+      print('Total: %.2f ms +- %.2f ms' % (t_mean, t_std))
 
 
 def run_model(args, model, dtype):
