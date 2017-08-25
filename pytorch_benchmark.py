@@ -18,18 +18,18 @@ parser.add_argument('--mode', default='train', choices=['train', 'test'])
 
 parser.add_argument('--use_gpu', default=1, type=int)
 parser.add_argument('--cudnn_benchmark', default=1, type=int)
-parser.add_argument('--precisions', default='fp16,fp32')
+parser.add_argument('--precisions', default='FP32,FP16')
 parser.add_argument('--batchnorm_workaround', default=1, type=int)
 
 
 def get_dtype(use_gpu, precision):
   dtypes = {
-    (1, 'fp16'): torch.cuda.HalfTensor,
-    (1, 'fp32'): torch.cuda.FloatTensor,
-    (1, 'fp64'): torch.cuda.DoubleTensor,
-    (0, 'fp16'): torch.HalfTensor,
-    (0, 'fp32'): torch.FloatTensor,
-    (0, 'fp64'): torch.DoubleTensor,
+    (1, 'FP16'): torch.cuda.HalfTensor,
+    (1, 'FP32'): torch.cuda.FloatTensor,
+    (1, 'FP64'): torch.cuda.DoubleTensor,
+    (0, 'FP16'): torch.HalfTensor,
+    (0, 'FP32'): torch.FloatTensor,
+    (0, 'FP64'): torch.DoubleTensor,
   }
   key = (use_gpu, precision)
   return dtypes[key]
@@ -54,18 +54,19 @@ def main(args):
       torch.backends.cudnn.benchmark = True
     print('Using cuDNN version ', torch.backends.cudnn.version())
   
-  for model in args.models.split(','):
-    for precision in args.precisions.split(','):
+  for precision in args.precisions.split(','):
+    for model in args.models.split(','):
       dtype = get_dtype(args.use_gpu, precision)
-      print('Running %s with dtype %s' % (model, dtype))
       forward_times, backward_times = run_model(args, model, dtype)
       total_times = forward_times + backward_times
       f_mean, f_std = forward_times.mean(), forward_times.std()
       b_mean, b_std = backward_times.mean(), backward_times.std()
       t_mean, t_std = total_times.mean(), total_times.std()
-      print('Forward: %.2f ms +- %.2f ms' % (f_mean, f_std))
-      print('Backward: %.2f ms +- %.2f ms' % (b_mean, b_std))
-      print('Total: %.2f ms +- %.2f ms' % (t_mean, t_std))
+      print('%s %s:' % (model, precision))
+      print('%.2f\t%.2f\t%.2f' % (f_mean, b_mean, t_mean))
+      # print('Forward: %.2f ms +- %.2f ms' % (f_mean, f_std))
+      # print('Backward: %.2f ms +- %.2f ms' % (b_mean, b_std))
+      # print('Total: %.2f ms +- %.2f ms' % (t_mean, t_std))
 
 
 def run_model(args, model, dtype, verbose=False):
